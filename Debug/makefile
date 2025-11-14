@@ -38,34 +38,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := RTOS_ADC_PWM_ULTRASON
+BUILD_ARTIFACT_NAME := PROJET_RTOS_CLEAN
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-RTOS_ADC_PWM_ULTRASON.elf \
+PROJET_RTOS_CLEAN.elf \
 
 MAP_FILES += \
-RTOS_ADC_PWM_ULTRASON.map \
+PROJET_RTOS_CLEAN.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-RTOS_ADC_PWM_ULTRASON.list \
+PROJET_RTOS_CLEAN.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: RTOS_ADC_PWM_ULTRASON.elf secondary-outputs
+main-build: PROJET_RTOS_CLEAN.elf secondary-outputs
 
 # Tool invocations
-RTOS_ADC_PWM_ULTRASON.elf RTOS_ADC_PWM_ULTRASON.map: $(OBJS) $(USER_OBJS) C:\Users\a888451\STM32CubeIDE\workspace_1.10.1\TESTBLINK\RTOS_ADC_PWM_ULTRASON\STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "RTOS_ADC_PWM_ULTRASON.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\a888451\STM32CubeIDE\workspace_1.10.1\TESTBLINK\RTOS_ADC_PWM_ULTRASON\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RTOS_ADC_PWM_ULTRASON.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+PROJET_RTOS_CLEAN.elf PROJET_RTOS_CLEAN.map: $(OBJS) $(USER_OBJS) C:\Users\a888451\STM32CubeIDE\workspace_1.10.1\TESTBLINK\PROJET_RTOS_CLEAN\STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "PROJET_RTOS_CLEAN.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\a888451\STM32CubeIDE\workspace_1.10.1\TESTBLINK\PROJET_RTOS_CLEAN\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="PROJET_RTOS_CLEAN.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -74,14 +74,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-RTOS_ADC_PWM_ULTRASON.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "RTOS_ADC_PWM_ULTRASON.list"
+PROJET_RTOS_CLEAN.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "PROJET_RTOS_CLEAN.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) RTOS_ADC_PWM_ULTRASON.elf RTOS_ADC_PWM_ULTRASON.list RTOS_ADC_PWM_ULTRASON.map default.size.stdout
+	-$(RM) PROJET_RTOS_CLEAN.elf PROJET_RTOS_CLEAN.list PROJET_RTOS_CLEAN.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

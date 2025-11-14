@@ -1,0 +1,26 @@
+# Build and temp files
+/build/
+Debug/
+Release/
+*.o
+*.d
+*.elf
+*.map
+*.bin
+*.hex
+
+# CubeIDE metadata
+/.settings/
+/STM32CubeIDE/.settings/
+*.launch
+
+# Backup files
+*~
+*.swp
+
+# Generated code (optional)
+Middlewares/*
+
+# Do not ignore source code
+!/Core/
+!/Drivers/

@@ -5,31 +5,61 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Core/Src/app_init.c \
+../Core/Src/board.c \
+../Core/Src/buzzer.c \
 ../Core/Src/freertos.c \
 ../Core/Src/main.c \
+../Core/Src/os_ressource.c \
+../Core/Src/sensors.c \
+../Core/Src/servo.c \
+../Core/Src/spi_if.c \
+../Core/Src/stm32_callbacks.c \
 ../Core/Src/stm32f4xx_hal_msp.c \
 ../Core/Src/stm32f4xx_it.c \
 ../Core/Src/syscalls.c \
 ../Core/Src/sysmem.c \
-../Core/Src/system_stm32f4xx.c 
+../Core/Src/system_stm32f4xx.c \
+../Core/Src/uart_debug.c \
+../Core/Src/ultrasonic.c 
 
 OBJS += \
+./Core/Src/app_init.o \
+./Core/Src/board.o \
+./Core/Src/buzzer.o \
 ./Core/Src/freertos.o \
 ./Core/Src/main.o \
+./Core/Src/os_ressource.o \
+./Core/Src/sensors.o \
+./Core/Src/servo.o \
+./Core/Src/spi_if.o \
+./Core/Src/stm32_callbacks.o \
 ./Core/Src/stm32f4xx_hal_msp.o \
 ./Core/Src/stm32f4xx_it.o \
 ./Core/Src/syscalls.o \
 ./Core/Src/sysmem.o \
-./Core/Src/system_stm32f4xx.o 
+./Core/Src/system_stm32f4xx.o \
+./Core/Src/uart_debug.o \
+./Core/Src/ultrasonic.o 
 
 C_DEPS += \
+./Core/Src/app_init.d \
+./Core/Src/board.d \
+./Core/Src/buzzer.d \
 ./Core/Src/freertos.d \
 ./Core/Src/main.d \
+./Core/Src/os_ressource.d \
+./Core/Src/sensors.d \
+./Core/Src/servo.d \
+./Core/Src/spi_if.d \
+./Core/Src/stm32_callbacks.d \
 ./Core/Src/stm32f4xx_hal_msp.d \
 ./Core/Src/stm32f4xx_it.d \
 ./Core/Src/syscalls.d \
 ./Core/Src/sysmem.d \
-./Core/Src/system_stm32f4xx.d 
+./Core/Src/system_stm32f4xx.d \
+./Core/Src/uart_debug.d \
+./Core/Src/ultrasonic.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -39,7 +69,7 @@ Core/Src/%.o Core/Src/%.su: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/freertos.d ./Core/Src/freertos.o ./Core/Src/freertos.su ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su
+	-$(RM) ./Core/Src/app_init.d ./Core/Src/app_init.o ./Core/Src/app_init.su ./Core/Src/board.d ./Core/Src/board.o ./Core/Src/board.su ./Core/Src/buzzer.d ./Core/Src/buzzer.o ./Core/Src/buzzer.su ./Core/Src/freertos.d ./Core/Src/freertos.o ./Core/Src/freertos.su ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/os_ressource.d ./Core/Src/os_ressource.o ./Core/Src/os_ressource.su ./Core/Src/sensors.d ./Core/Src/sensors.o ./Core/Src/sensors.su ./Core/Src/servo.d ./Core/Src/servo.o ./Core/Src/servo.su ./Core/Src/spi_if.d ./Core/Src/spi_if.o ./Core/Src/spi_if.su ./Core/Src/stm32_callbacks.d ./Core/Src/stm32_callbacks.o ./Core/Src/stm32_callbacks.su ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su ./Core/Src/uart_debug.d ./Core/Src/uart_debug.o ./Core/Src/uart_debug.su ./Core/Src/ultrasonic.d ./Core/Src/ultrasonic.o ./Core/Src/ultrasonic.su
 
 .PHONY: clean-Core-2f-Src
 

@@ -28,6 +28,15 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+void SystemClock_Config(void);
+void MX_GPIO_Init(void);
+void MX_DMA_Init(void);
+void MX_ADC1_Init(void);
+void MX_TIM1_Init(void);
+void MX_TIM2_Init(void);
+void MX_TIM3_Init(void);
+void MX_USART2_UART_Init(void);
+void MX_SPI1_Init(void);
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -61,8 +70,8 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define TRIG_Pin GPIO_PIN_5
 #define TRIG_GPIO_Port GPIOA
-#define LED2_Pin GPIO_PIN_10
-#define LED2_GPIO_Port GPIOB
+#define LED2_Pin GPIO_PIN_7
+#define LED2_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

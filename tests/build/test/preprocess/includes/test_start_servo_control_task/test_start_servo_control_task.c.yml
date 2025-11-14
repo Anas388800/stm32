@@ -1,0 +1,6 @@
+---
+- build/vendor/unity/src/unity.h
+- "../Core/Inc/main.h"
+- mock_hal_adc.h
+- mock_hal_tim.h
+- mock_uart.h
