@@ -83,15 +83,10 @@ void ultrasonic_task(void *argument)
             sprintf(msg, "Distance: %d cm\r\n", distance);
             UART_Debug(msg);
 
-            if (distance < 40 && distance > 10) {
-                uint16_t buz = (uint16_t)map_int32(distance, 5, 40, 100, 500);
+            if (distance < 40) {
+                uint16_t buz = (uint16_t)map_int32(distance, 5, 40, 100, 900);
                 buzzer_set_tone(buz);
-            }
-            else if (distance < 10 ){
-            	uint16_t buz = (uint16_t)map_int32(distance, 5, 40, 100, 200);
-            	buzzer_set_tone(buz);
-            }
-            else {
+            } else {
                 buzzer_set_tone(0);
             }
         }
