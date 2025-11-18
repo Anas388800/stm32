@@ -39,25 +39,25 @@ void ultrasonic_trigger(void)
 /* API called from HAL callback */
 void ultrasonic_capture_cb(TIM_HandleTypeDef *htim)
 {
-    if (htim->Channel != HAL_TIM_ACTIVE_CHANNEL_1) return;
+    if (htim->Channel != HAL_TIM_ACTIVE_CHANNEL_1) return; // Vérifie que l'interruption vient bien du canal 1, sinon quitte la fonction
 
-    if (!Is_First_Captured) {
-        IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
-        Is_First_Captured = 1;
-        __HAL_TIM_SET_CAPTUREPOLARITY(htim, TIM_CHANNEL_1, TIM_INPUTCHANNELPOLARITY_FALLING);
-    } else {
-        IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
-        __HAL_TIM_SET_COUNTER(htim, 0);
-        if (IC_Val2 > IC_Val1) Difference = IC_Val2 - IC_Val1;
-        else Difference = (0xffff - IC_Val1) + IC_Val2;
-        Distance = (uint8_t)(Difference * 0.034 / 2);
-        Is_First_Captured = 0;
-        __HAL_TIM_SET_CAPTUREPOLARITY(htim, TIM_CHANNEL_1, TIM_INPUTCHANNELPOLARITY_RISING);
-        __HAL_TIM_DISABLE_IT(&htim1, TIM_IT_CC1);
+    if (!Is_First_Captured) { // Si c'est la première capture (front montant)
+        IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1); // Lit la valeur du timer au premier front
+        Is_First_Captured = 1; // Indique qu'on a effectué la première capture
+        __HAL_TIM_SET_CAPTUREPOLARITY(htim, TIM_CHANNEL_1, TIM_INPUTCHANNELPOLARITY_FALLING); // Change la détection : maintenant on attend un front descendant
+    } else { // Deuxième capture (front descendant)
+        IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1); // Lit la valeur du timer au deuxième front
+        __HAL_TIM_SET_COUNTER(htim, 0); // Réinitialise le compteur pour la prochaine mesure
+        if (IC_Val2 > IC_Val1) Difference = IC_Val2 - IC_Val1; // Si pas de débordement : durée = deuxième - première valeur
+        else Difference = (0xffff - IC_Val1) + IC_Val2; // Si le timer a débordé entre les deux fronts
+        Distance = (uint8_t)(Difference * 0.034 / 2); // Convertit le temps en distance (vitesse du son : 0,034 cm/µs, aller-retour → /2)
+        Is_First_Captured = 0; // Réinitialise l’état pour la prochaine mesure
+        __HAL_TIM_SET_CAPTUREPOLARITY(htim, TIM_CHANNEL_1, TIM_INPUTCHANNELPOLARITY_RISING); // Remet la capture sur front montant pour relancer un cycle
+        __HAL_TIM_DISABLE_IT(&htim1, TIM_IT_CC1); // Désactive l'interruption du canal 1 (évite d’interrompre en boucle)
 
-        BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-        if (DistanceQueue) xQueueSendFromISR(DistanceQueue, &Distance, &xHigherPriorityTaskWoken);
-        portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+        BaseType_t xHigherPriorityTaskWoken = pdFALSE; // Variable pour indiquer si une tâche plus prioritaire doit être réveillée
+        if (DistanceQueue) xQueueSendFromISR(DistanceQueue, &Distance, &xHigherPriorityTaskWoken); // Envoie la distance calculée à une queue FreeRTOS depuis l’ISR
+        portYIELD_FROM_ISR(xHigherPriorityTaskWoken);  // Permet à FreeRTOS de changer de tâche si nécessaire (retour ISR)
     }
 }
 

@@ -56,10 +56,10 @@ void App_Init(void)
     UART_Debug_Init();
     UART_Debug("App_Init: starting modules...\r\n");
 
-    ultrasonic_init();
-    servo_init();
-    buzzer_init();
-    spi_if_init();
+    ultrasonic_init(); // starting timer 1
+    servo_init();	   // starting timer 2
+    buzzer_init();     // starting timer 3
+    spi_if_init();     // starting DMA reception
 
     /* Any board-level init that must be done before starting tasks */
     Board_InitBeforeOs();
